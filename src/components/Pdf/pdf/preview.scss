@@ -67,10 +67,10 @@
 
       input {
         display: inline-block;
-        width: 70px;
+        width: 30px;
         text-align: center;
         margin-right: 10px;
-        height: 35px;
+        height: 15px;
       }
 
       input::-webkit-outer-spin-button,
@@ -88,6 +88,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      .btn-icon{
+        cursor: pointer;
+      }
     }
 
     button {

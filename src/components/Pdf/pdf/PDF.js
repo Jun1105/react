@@ -114,7 +114,9 @@ function MyApp({ file = " " }) {
         <div className="footer-wrap">
           <div className="pageTool">
             <div className="btn-wrap" onClick={lastPage} title="last page">
-              <Lastpage type="icon-xiayiyehouyiye" />
+              <div className="btn-icon" onClick={nextPage}>
+                <Lastpage type="icon-xiayiyehouyiye" />
+              </div>
             </div>
             <Input
               value={pageNumberFocus ? pageNumberInput : pageNumber}
@@ -125,13 +127,19 @@ function MyApp({ file = " " }) {
             />
             / {numPages}
             <div className="btn-wrap" onClick={nextPage} title="next page">
-              <Nextpage type="icon-xiayiyehouyiye" />
+              <div className="btn-icon" onClick={nextPage}>
+                <Nextpage type="icon-xiayiyehouyiye" />
+              </div>
             </div>
             <div className="btn-wrap" onClick={pageZoomIn} title="zoomIn">
-              <Zoomout type="plus" />
+              <div className="btn-icon" onClick={nextPage}>
+                <Zoomout type="plus" />
+              </div>
             </div>
             <div className="btn-wrap" onClick={pageZoomOut} title="zoomOut">
-              <Zoomin type="icon-suoxiao1" style={{ textAlign: "center" }} />
+              <div className="btn-icon" onClick={nextPage}>
+                <Zoomin type="icon-suoxiao1" style={{ textAlign: "center" }} />
+              </div>
             </div>
           </div>
         </div>
