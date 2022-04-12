@@ -27,7 +27,7 @@ function MyApp({ file = " " }) {
 
   // 上一页 (lastPage)
   function lastPage() {
-    if (pageNumber == 1) {
+    if (pageNumber === 1) {
       toast.info("This is the first page", 2)
       return
     }
@@ -38,7 +38,7 @@ function MyApp({ file = " " }) {
 
   //下一页(nextPage)
   function nextPage() {
-    if (pageNumber == numPages) {
+    if (pageNumber === numPages) {
       toast.info("This is the last page", 2)
       return
     }
@@ -113,8 +113,8 @@ function MyApp({ file = " " }) {
       {fileType === "pdf" && (
         <div className="footer-wrap">
           <div className="pageTool">
-            <div className="btn-wrap" onClick={lastPage} title="last page">
-              <div className="btn-icon" onClick={nextPage}>
+            <div className="btn-wrap" title="last page">
+              <div className="btn-icon" onClick={lastPage}>
                 <Lastpage type="icon-xiayiyehouyiye" />
               </div>
             </div>
@@ -126,18 +126,18 @@ function MyApp({ file = " " }) {
               onKeyDown={handleKeyDown}
             />
             / {numPages}
-            <div className="btn-wrap" onClick={nextPage} title="next page">
+            <div className="btn-wrap" title="next page">
               <div className="btn-icon" onClick={nextPage}>
                 <Nextpage type="icon-xiayiyehouyiye" />
               </div>
             </div>
-            <div className="btn-wrap" onClick={pageZoomIn} title="zoomIn">
-              <div className="btn-icon" onClick={nextPage}>
+            <div className="btn-wrap" title="zoomIn">
+              <div className="btn-icon" onClick={pageZoomIn}>
                 <Zoomout type="plus" />
               </div>
             </div>
-            <div className="btn-wrap" onClick={pageZoomOut} title="zoomOut">
-              <div className="btn-icon" onClick={nextPage}>
+            <div className="btn-wrap" title="zoomOut">
+              <div className="btn-icon" onClick={pageZoomOut}>
                 <Zoomin type="icon-suoxiao1" style={{ textAlign: "center" }} />
               </div>
             </div>

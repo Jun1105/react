@@ -10,6 +10,8 @@ export default function Home() {
       </main>
       <nav>
         <Link to="/about">About</Link>
+        <br/>
+        <Link to="/pdfpreview">pdfpreview</Link>
       </nav>
     </>
   )
