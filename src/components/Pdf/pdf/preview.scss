@@ -1,6 +1,4 @@
 .preview-pdf-wrap {
-  height: 100vh;
-  width: 100vw;
   display: flex;
   // overflow: auto;
   flex-direction: column;
@@ -24,11 +22,6 @@
           align-items: center;
           transform: scale(0.3, 0.3);
         }
-      }
-
-      .pageContainer {
-        width: max-content;
-        max-width: 100%;
       }
     }
 
