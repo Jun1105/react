@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Document, Page, pdfjs } from "react-pdf"
 import { toast } from "react-toastify"
 import "./preview.scss"
@@ -14,15 +14,45 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cat.net/ajax/libs/pdf.js/${pdfjs.
 function MyApp({ file = " " }) {
   const [numPages, setNumPages] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
-  const [scale, setScale] = useState(2.3)
+  const [scale, setScale] = useState(1.5)
   const fileType = file.split(";")[0].split("/")[1]
   const [pageNumberFocus, setPageNumberFocus] = useState(false)
   const [pageNumberInput, setPageNumberInput] = useState(1)
-  // console.log(file)
+  // const [fullscreen, setFullscreen] = useState(false)
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
     setPageNumber(pageNumber)
+  }
+  useEffect(
+    () => {
+      window.addEventListener("scroll", handleScroll, true)
+      return () => {
+        window.removeEventListener("scroll", handleScroll, true)
+      }
+    },
+    [pageNumber, numPages], // eslint-disable-line react-hooks/exhaustive-deps
+    handleScroll
+  )
+
+  function handleScroll(e) {
+    let height = e.srcElement.documentElement.scrollTop + e.srcElement.documentElement.clientHeight
+    height = Math.ceil(height)
+    let scrollTop = e.srcElement.documentElement.scrollTop
+    let scrollHeight = e.srcElement.documentElement.scrollHeight
+
+    if (pageNumber !== 1 && scrollTop === 0) {
+      const page = pageNumber - 1
+      setPageNumber(page)
+      setPageNumberInput(page)
+      window.scrollTo(0, 10)
+    }
+    if (pageNumber !== numPages && height >= scrollHeight - 10) {
+      const page = pageNumber + 1
+      setPageNumber(page)
+      setPageNumberInput(page)
+      window.scrollTo(0, 10)
+    }
   }
 
   // 上一页 (lastPage)
@@ -87,18 +117,17 @@ function MyApp({ file = " " }) {
   }
 
   return (
-    <div className="preview-pdf-wrap">
-      <div className="content-wrap">
+    <div className='preview-pdf-wrap'>
+      <div className='content-wrap'>
         {file && (
-          <Card className="cardItem" bordered={false}>
+          <Card className='cardItem' bordered={false}>
             {fileType === "jpg" || fileType === "png" || fileType === "jpeg" ? (
-              <div className="img-wrap">
-                <img src={file} style={{ width: "100vw" }} alt="Red dot" />
+              <div className='img-wrap'>
+                <img src={file} style={{ width: "100vw" }} alt='Red dot' />
               </div>
             ) : (
-              <div className="pageContainer">
+              <div className='pageContainer'>
                 <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                  {/* {new Array(numPages).fill().map(cur,index) =>} */}
                   <Page pageNumber={pageNumber} scale={scale} />
                 </Document>
               </div>
@@ -111,11 +140,11 @@ function MyApp({ file = " " }) {
         </p>
       </div>
       {fileType === "pdf" && (
-        <div className="footer-wrap">
-          <div className="pageTool">
-            <div className="btn-wrap" title="last page">
-              <div className="btn-icon" onClick={lastPage}>
-                <Lastpage type="icon-xiayiyehouyiye" />
+        <div className='footer-wrap'>
+          <div className='pageTool'>
+            <div className='btn-wrap' title='last page'>
+              <div className='btn-icon' onClick={lastPage}>
+                <Lastpage type='icon-xiayiyehouyiye' />
               </div>
             </div>
             <Input
@@ -126,19 +155,19 @@ function MyApp({ file = " " }) {
               onKeyDown={handleKeyDown}
             />
             / {numPages}
-            <div className="btn-wrap" title="next page">
-              <div className="btn-icon" onClick={nextPage}>
-                <Nextpage type="icon-xiayiyehouyiye" />
+            <div className='btn-wrap' title='next page'>
+              <div className='btn-icon' onClick={nextPage}>
+                <Nextpage type='icon-xiayiyehouyiye' />
               </div>
             </div>
-            <div className="btn-wrap" title="zoomIn">
-              <div className="btn-icon" onClick={pageZoomIn}>
-                <Zoomout type="plus" />
+            <div className='btn-wrap' title='zoomIn'>
+              <div className='btn-icon' onClick={pageZoomIn}>
+                <Zoomout type='plus' />
               </div>
             </div>
-            <div className="btn-wrap" title="zoomOut">
-              <div className="btn-icon" onClick={pageZoomOut}>
-                <Zoomin type="icon-suoxiao1" style={{ textAlign: "center" }} />
+            <div className='btn-wrap' title='zoomOut'>
+              <div className='btn-icon' onClick={pageZoomOut}>
+                <Zoomin type='icon-suoxiao1' style={{ textAlign: "center" }} />
               </div>
             </div>
           </div>
