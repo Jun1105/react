@@ -18,12 +18,12 @@ function MyApp({ file = " " }) {
   const fileType = file.split(";")[0].split("/")[1]
   const [pageNumberFocus, setPageNumberFocus] = useState(false)
   const [pageNumberInput, setPageNumberInput] = useState(1)
-  // const [fullscreen, setFullscreen] = useState(false)
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
     setPageNumber(pageNumber)
   }
+
   useEffect(
     () => {
       window.addEventListener("scroll", handleScroll, true)
@@ -131,7 +131,7 @@ function MyApp({ file = " " }) {
             ) : (
               <div className='pageContainer'>
                 <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                  <Page pageNumber={pageNumber} scale={scale} />
+                  <Page pageNumber={pageNumber} scale={scale} width={window.innerWidth - 100} />
                 </Document>
               </div>
             )}
