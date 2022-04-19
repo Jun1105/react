@@ -64,6 +64,7 @@ function MyApp({ file = " " }) {
     const page = pageNumber - 1
     setPageNumber(page)
     setPageNumberInput(page)
+    window.scrollTo(0, 10)
   }
 
   //下一页(nextPage)
@@ -75,6 +76,7 @@ function MyApp({ file = " " }) {
     const page = pageNumber + 1
     setPageNumber(page)
     setPageNumberInput(page)
+    window.scrollTo(0, 10)
   }
 
   // 跳转页面
@@ -94,6 +96,7 @@ function MyApp({ file = " " }) {
   function handleKeyDown(e) {
     if (e.keyCode === 13) {
       setPageNumber(Number(e.target.value))
+      window.scrollTo(0, 10)
     }
   }
 
